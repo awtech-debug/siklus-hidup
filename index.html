@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>METAMORFOLAB — Mesin Waktu Siklus Hidup Makhluk Hidup (MI Muhammadiyah 1 Slinga)</title>
+<style>
+  :root { --navy:#1B4F72; --purple:#6C3483; --teal:#0E6251; --bg:#F4F6F9; --text:#1C2833; --border:#D5D8DC; }
+  * { box-sizing:border-box; font-family:'Segoe UI',system-ui,sans-serif; }
+  body { margin:0; background:var(--bg); color:var(--text); }
+  header { background:linear-gradient(135deg,#6C3483 0%,#1B4F72 100%); color:#fff; padding:15px 24px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; }
+  header h1 { margin:0; font-size:1.4rem; }
+  header p { margin:3px 0 0; font-size:0.85rem; opacity:0.92; }
+  .dev-badge { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:7px 13px; font-size:0.8rem; text-align:right; }
+  .dev-badge strong { color:#F9E79F; display:block; }
+  main { max-width:1180px; margin:18px auto; padding:0 16px 40px; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:880px){ .grid-2{ grid-template-columns:1fr; } }
+  .card { background:#fff; border-radius:12px; padding:18px; border:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+  .card h2 { margin-top:0; font-size:1.1rem; color:#6C3483; border-bottom:2px solid #F5EEF8; padding-bottom:8px; }
+  .stage-box { text-align:center; background:#F5EEF8; border:2px solid #8E44AD; border-radius:12px; padding:20px; margin:12px 0; }
+  .stage-ico { font-size:4rem; display:block; margin-bottom:6px; }
+  input[type=range] { width:100%; accent-color:#6C3483; }
+  .info-box { background:#FEF9E7; border-left:4px solid #D4AC0D; padding:12px 14px; border-radius:6px; font-size:0.9rem; line-height:1.45; margin-top:10px; }
+  footer { text-align:center; padding:14px; background:#fff; border-top:1px solid var(--border); font-size:0.82rem; color:#566573; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>METAMORFOLAB — Mesin Waktu Siklus Hidup Makhluk Hidup</h1>
+    <p>Media Interaktif IPAS Kelas III (Bab 2: Siklus Hidup Makhluk Hidup) • MI Muhammadiyah 1 Slinga</p>
+  </div>
+  <div class="dev-badge">
+    <strong>Pengembang: Alfam Atthamimy, S.Pd.I</strong>
+    <span>Guru Kelas III • MI Muhammadiyah 1 Slinga</span>
+  </div>
+</header>
+<main>
+  <div class="card" style="margin-bottom:18px;">
+    <h2>Penggeser Mesin Waktu Pertumbuhan (Geser dari Minggu 1 hingga Minggu 4)</h2>
+    <input type="range" id="timeSlider" min="0" max="3" value="0" oninput="updateTimeline()">
+    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.85rem; color:#6C3483;">
+      <span>Tahap 1 (Telur)</span><span>Tahap 2 (Larva/Nimfa)</span><span>Tahap 3 (Pupa/Nimfa Besar)</span><span>Tahap 4 (Dewasa/Imago)</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>A. Metamorfosis Sempurna (Kupu-Kupu)</h2>
+      <div class="stage-box">
+        <span class="stage-ico" id="kIco">🥚</span>
+        <strong style="font-size:1.15rem;" id="kName">1. Telur Kupu-Kupu</strong>
+        <p id="kDesc" style="font-size:0.9rem; margin:6px 0 0;"></p>
+      </div>
+      <div class="info-box" style="background:#E8F8F5; border-color:#0E6251;">
+        <strong>Ciri Metamorfosis Sempurna:</strong> Mengalami 4 tahap pertumbuhan dengan perubahan bentuk yang sangat berbeda dan melewati fase <strong>Kepompong (Pupa)</strong>.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>B. Metamorfosis Tidak Sempurna (Belalang)</h2>
+      <div class="stage-box" style="background:#EBF5FB; border-color:#1B4F72;">
+        <span class="stage-ico" id="bIco">🥚</span>
+        <strong style="font-size:1.15rem;" id="bName">1. Telur Belalang</strong>
+        <p id="bDesc" style="font-size:0.9rem; margin:6px 0 0;"></p>
+      </div>
+      <div class="info-box">
+        <strong>Ciri Metamorfosis Tidak Sempurna:</strong> Hanya mengalami 3 tahap utama (Telur → Nimfa → Imago) <strong>tanpa fase kepompong</strong>; bentuk anak (nimfa) sudah mirip induknya tetapi belum bersayap.
+      </div>
+    </div>
+  </div>
+</main>
+<footer><strong>METAMORFOLAB v1.0</strong> — Inovasi Pembelajaran IPAS Kelas III • Dikembangkan oleh <strong>Alfam Atthamimy, S.Pd.I</strong> (MI Muhammadiyah 1 Slinga)</footer>
+<script>
+const KUPU = [
+  {ico:'🥚', name:'1. Telur Kupu-Kupu', desc:'Diletakkan induk kupu-kupu di permukaan daun tanaman di kebun madrasah.'},
+  {ico:'🐛', name:'2. Larva (Ulat)', desc:'Menetas dari telur dan aktif memakan daun-daunan hijau untuk tumbuh besar.'},
+  {ico:'🫛', name:'3. Pupa (Kepompong)', desc:'Ulat membungkus diri dalam kepompong (fase istirahat) untuk membentuk sayap.'},
+  {ico:'🦋', name:'4. Imago (Kupu-Kupu Dewasa)', desc:'Keluar dari kepompong dengan sayap indah dan membantu penyerbukan bunga.'}
+];
+const BELALANG = [
+  {ico:'🥚', name:'1. Telur Belalang', desc:'Induk belalang menyimpan telur di dalam tanah lembap sekitar rerumputan.'},
+  {ico:'🦗', name:'2. Nimfa Muda (Tanpa Sayap)', desc:'Bentuk tubuh sudah menyerupai belalang dewasa namun ukurannya kecil dan belum bersayap.'},
+  {ico:'🦗', name:'3. Nimfa Besar (Ganti Kulit)', desc:'Mengalami pergantian kulit (ekdisis) dan mulai tumbuh bakal sayap kecil.'},
+  {ico:'🦗', name:'4. Imago (Belalang Dewasa)', desc:'Sayap sudah tumbuh sempurna sehingga belalang dapat terbang dan bertelur kembali.'}
+];
+function updateTimeline(){
+  const idx = parseInt(document.getElementById('timeSlider').value);
+  document.getElementById('kIco').textContent = KUPU[idx].ico;
+  document.getElementById('kName').textContent = KUPU[idx].name;
+  document.getElementById('kDesc').textContent = KUPU[idx].desc;
+  document.getElementById('bIco').textContent = BELALANG[idx].ico;
+  document.getElementById('bName').textContent = BELALANG[idx].name;
+  document.getElementById('bDesc').textContent = BELALANG[idx].desc;
+}
+updateTimeline();
+</script>
+</body>
+</html>
